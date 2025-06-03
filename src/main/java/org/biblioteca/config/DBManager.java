@@ -20,5 +20,13 @@ public class DBManager {
         }
         return connection;
     }
+    public static void closeConnection() {
+        try {
+            connection.close();
+            System.out.println("Conexion cerrada correctamente");
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
 
 }
