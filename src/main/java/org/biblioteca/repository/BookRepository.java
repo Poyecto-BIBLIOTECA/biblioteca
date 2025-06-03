@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookRepository {
     List<Book> getLibrary() throws SQLException;
-    Book getBook(String isbn);
+    Book getBook(String isbn) throws SQLException;
     void updateBook(Book book);
     void createBook(Book book);
     void deleteBook(int idbook);

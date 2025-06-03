@@ -28,8 +28,20 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Book getBook(String isbn) {
-        return null;
+    public Book getBook(String isbn) throws SQLException {
+        String query = "SELECT * FROM library.book WHERE isbn = '"+isbn+"'";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        Book book = new Book(0,null,null,null,null,null);
+        while (rs.next()) {
+            book.setIdbook(rs.getInt("idbook"));
+            book.setTitle(rs.getString("title"));
+            book.setAuthor(rs.getString("author"));
+            book.setDescription(rs.getString("description"));
+            book.setIsbn(rs.getString("isbn"));
+            book.setGenre(rs.getString("genre"));
+        }
+        return book;
     }
 
     @Override

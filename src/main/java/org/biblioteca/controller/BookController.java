@@ -14,4 +14,10 @@ public class BookController {
         List<Book> books = bookRepository.getLibrary();
         return books;
     }
+    public Book showBook(String isbn) throws SQLException {
+        Book book = bookRepository.getBook(isbn);
+        return book;
+    }
 }
+
+

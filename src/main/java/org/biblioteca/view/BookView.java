@@ -57,8 +57,11 @@ public class BookView {
     public void addBook() {
         System.out.println("2. Añadir libros");
     }
-    public void editBook() {
-        System.out.println("3. Lista de libros");
+    public void editBook() throws SQLException {
+        System.out.println("Introduce el ISBN del libro que quieres editar: ");
+        String isbn = scanner.nextLine();
+        Book book = bookController.showBook(isbn);
+        System.out.println("El ID de tu libro es: " + book.getIdbook());
     }
     public void deleteBook() {
         System.out.println("4. Lista de libros");
