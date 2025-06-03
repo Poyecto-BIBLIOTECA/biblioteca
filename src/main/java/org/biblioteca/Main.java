@@ -5,7 +5,7 @@ import org.biblioteca.view.BookView;
 
 public class Main{
     public static void main (String[]args){
-        DBManager.initConnection();
+       DBManager.initConnection();
         BookView view = new BookView();
         view.viewMenu();
         DBManager.closeConnection();
