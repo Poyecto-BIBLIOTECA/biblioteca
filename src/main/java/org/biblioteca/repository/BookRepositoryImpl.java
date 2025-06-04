@@ -68,7 +68,18 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void deleteBook(int idbook) {
+    public int deleteBook(int id) throws SQLException {
+        String sql = "DELETE FROM book WHERE idbook = " + id;
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            int affectedRows = stmt.executeUpdate(sql);
+            return affectedRows;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
 
+        }
     }
 }

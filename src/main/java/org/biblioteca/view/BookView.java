@@ -106,8 +106,24 @@ public class BookView {
         bookController.updateBook(book);
         System.out.println("Libro actualizado exitosamente!");
     }
-    public void deleteBook() {
-        System.out.println("4. Lista de libros");
+    public void deleteBook() throws SQLException {
+        while (true) {
+            System.out.println("Introduce el ID del libro que quieres eliminar: ");
+            int id = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("¿Está seguro que desea borrar este libro? (s/n): ");
+            String confirm = scanner.nextLine().trim().toLowerCase();
+
+            if (confirm.equals("s")) {
+                String result = bookController.deleteBook(id);
+                System.out.println(result);
+                break;
+            } else if (confirm.equals("n")) {
+                System.out.println("⚠ Operación cancelada. Por favor, introduce otro ID.");
+            } else {
+                System.out.println("⚠ Respuesta inválida. Por favor, responde con s o n.");
+            }
+        }
     }
     public void exitApp() {
         System.out.println("5. Lista de libros");
