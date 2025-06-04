@@ -17,6 +17,9 @@ public class Book {
         this.genre = genre;
     }
 
+    public Book(String title, String author, int isbn) {
+    }
+
     public int getIdbook() {
         return idbook;
     }

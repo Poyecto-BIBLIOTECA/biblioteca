@@ -58,4 +58,7 @@ public class BookRepositoryImpl implements BookRepository {
     public void deleteBook(int idbook) {
 
     }
+
+    public void addBook(Book book) {
+    }
 }
