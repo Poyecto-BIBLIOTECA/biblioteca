@@ -25,6 +25,8 @@ public class BookController {
         } else {
             return "❌❌️ El libro no existe. :(";
         }
+    public void updateBook(Book book) {
+        bookRepository.updateBook(book);
     }
 }
 

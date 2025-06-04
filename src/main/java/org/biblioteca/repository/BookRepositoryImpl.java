@@ -2,7 +2,7 @@ package org.biblioteca.repository;
 
 import org.biblioteca.config.DBManager;
 import org.biblioteca.model.Book;
-
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,9 +46,22 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void updateBook(Book book) {
-
+        String query = "UPDATE library.book SET title=?, author=?, description=?, isbn=?, genre=? WHERE idbook=?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setString(3, book.getDescription());
+            pstmt.setString(4, book.getIsbn());
+            pstmt.setString(5, book.getGenre());
+            pstmt.setInt(6, book.getIdbook());
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("No se encontró el libro con ID: " + book.getIdbook());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el libro: " + e.getMessage());
+        }
     }
-
     @Override
     public void createBook(Book book) {
 
