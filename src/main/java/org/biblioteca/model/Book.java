@@ -1,14 +1,14 @@
 package org.biblioteca.model;
 
 public class Book {
-        private int idbook;
-        private String title;
-        private String author;
-        private String description;
-        private String isbn;
-        private String genre;
+    private int idbook;
+    private String title;
+    private String author;
+    private String description;
+    private String isbn;
+    private String genre;
 
-    public Book(int idbook, String title, String author, String description, String isbn, String genre) {
+    public Book (int idbook, String title, String author, String description, String isbn, String genre) {
         this.idbook = idbook;
         this.title = title;
         this.author = author;
