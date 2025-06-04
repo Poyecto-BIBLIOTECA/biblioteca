@@ -55,8 +55,33 @@ public class BookView {
         }
     }
     public void addBook() {
-        System.out.println("2. Añadir libros");
+        System.out.println("➡ Añadiendo nuevo libro");
+
+        System.out.print("Título: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Autor: ");
+        String author = scanner.nextLine();
+
+        System.out.print("Descripción (opcional): ");
+        String description = scanner.nextLine();
+
+        System.out.print("ISBN: ");
+        String isbn = scanner.nextLine();
+
+        System.out.print("Género: ");
+        String genre = scanner.nextLine();
+
+        if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
+            System.out.println("❌ Error: Título, autor e ISBN son obligatorios");
+            return;
+        }
+
+        Book newBook = new Book(0, title, author, description, isbn, genre);
+        bookController.createBook(newBook);
+        System.out.println("✅ Libro añadido correctamente!");
     }
+
     public void editBook() throws SQLException {
         System.out.println("Introduce el ISBN del libro que quieres editar: ");
         String isbn = scanner.nextLine();
@@ -126,7 +151,7 @@ public class BookView {
         }
     }
     public void exitApp() {
-        System.out.println("5. Lista de libros");
+        System.out.println("¡Gracias por utilizar nuestra aplicacion! ¡Hasta pronto!");
 
         scanner.close();
     }

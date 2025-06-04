@@ -19,6 +19,9 @@ public class BookController {
         Book book = bookRepository.getBook(isbn);
         return book;
     }
+    public void createBook(Book book) {
+        bookRepository.createBook(book);
+    }
 
     public String deleteBook(int id) throws SQLException {
         int deleted = bookRepository.deleteBook(id);
