@@ -66,6 +66,20 @@ public class BookView {
             System.out.println("Libro no encontrado.");
             return;
         }
+        System.out.println("Libro encontrado:");
+        System.out.println("Título: " + book.getTitle());
+        System.out.println("Autor: " + book.getAuthor());
+        System.out.println("Descripción: " + book.getDescription());
+        System.out.println("ISBN: " + book.getIsbn());
+        System.out.println("Género: " + book.getGenre());
+
+        System.out.println("¿Es este el libro que deseas editar? (s/n): ");
+        String confirmacion = scanner.nextLine().trim().toLowerCase();
+
+        if (!(confirmacion.equals("s") || confirmacion.equals("si") || confirmacion.equals("sí"))) {
+            System.out.println("Edición cancelada.");
+            return;
+        }
 
         System.out.println("Deja en blanco los campos que no quieras modificar.");
 
