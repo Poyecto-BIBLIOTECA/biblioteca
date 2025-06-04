@@ -10,5 +10,5 @@ public interface BookRepository {
     Book getBook(String isbn) throws SQLException;
     void updateBook(Book book);
     void createBook(Book book);
-    void deleteBook(int idbook);
+    public int deleteBook(String isbn) throws SQLException;
 }

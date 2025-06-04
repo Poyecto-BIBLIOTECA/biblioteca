@@ -64,11 +64,33 @@ public class BookRepositoryImpl implements BookRepository {
     }
     @Override
     public void createBook(Book book) {
-
+        String query = "INSERT INTO library.book (title, author, description, isbn, genre) VALUES (?,?,?,?,?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setString(3, book.getDescription());
+            pstmt.setString(4, book.getIsbn());
+            pstmt.setString(5, book.getGenre());
+            pstmt.executeUpdate();
+            System.out.println("Libro creado en la base de datos");
+        } catch (SQLException e) {
+            System.out.println("Error al crear el libro: " + e.getMessage());
+        }
     }
 
-    @Override
-    public void deleteBook(int idbook) {
 
+    @Override
+    public int deleteBook(String isbn) throws SQLException {
+        String sql = "DELETE FROM book WHERE isbn = '" + isbn + "'";
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            int affectedRows = stmt.executeUpdate(sql);
+            return affectedRows;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
     }
 }
