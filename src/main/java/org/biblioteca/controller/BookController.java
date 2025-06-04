@@ -18,6 +18,9 @@ public class BookController {
         Book book = bookRepository.getBook(isbn);
         return book;
     }
+    public void updateBook(Book book) {
+        bookRepository.updateBook(book);
+    }
 }
 
 

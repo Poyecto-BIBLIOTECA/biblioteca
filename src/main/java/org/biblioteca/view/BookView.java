@@ -61,7 +61,36 @@ public class BookView {
         System.out.println("Introduce el ISBN del libro que quieres editar: ");
         String isbn = scanner.nextLine();
         Book book = bookController.showBook(isbn);
-        System.out.println("El ID de tu libro es: " + book.getIdbook());
+
+        if (book.getIdbook() == 0) {
+            System.out.println("Libro no encontrado.");
+            return;
+        }
+
+        System.out.println("Deja en blanco los campos que no quieras modificar.");
+
+        System.out.println("Nuevo título (actual: " + book.getTitle() + "): ");
+        String title = scanner.nextLine();
+        if (!title.isEmpty()) book.setTitle(title);
+
+        System.out.println("Nuevo autor (actual: " + book.getAuthor() + "): ");
+        String author = scanner.nextLine();
+        if (!author.isEmpty()) book.setAuthor(author);
+
+        System.out.println("Nueva descripción (actual: " + book.getDescription() + "): ");
+        String description = scanner.nextLine();
+        if (!description.isEmpty()) book.setDescription(description);
+
+        System.out.println("Nuevo ISBN (actual: " + book.getIsbn() + "): ");
+        String newIsbn = scanner.nextLine();
+        if (!newIsbn.isEmpty()) book.setIsbn(newIsbn);
+
+        System.out.println("Nuevo género (actual: " + book.getGenre() + "): ");
+        String genre = scanner.nextLine();
+        if (!genre.isEmpty()) book.setGenre(genre);
+
+        bookController.updateBook(book);
+        System.out.println("Libro actualizado exitosamente!");
     }
     public void deleteBook() {
         System.out.println("4. Lista de libros");

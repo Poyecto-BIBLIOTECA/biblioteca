@@ -2,7 +2,7 @@ package org.biblioteca.repository;
 
 import org.biblioteca.config.DBManager;
 import org.biblioteca.model.Book;
-
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +20,8 @@ public class BookRepositoryImpl implements BookRepository {
         ResultSet rs = stmt.executeQuery(query);
         List<Book> books = new ArrayList<>();
         while (rs.next()) {
-            Book book = new Book(rs.getInt("idbook"), rs.getString("title"),rs.getString("author"),
-                    rs.getString("description"),rs.getString("isbn"), rs.getString("genre"));
+            Book book = new Book(rs.getInt("idbook"), rs.getString("title"), rs.getString("author"),
+                    rs.getString("description"), rs.getString("isbn"), rs.getString("genre"));
             books.add(book);
         }
         return books;
@@ -29,10 +29,10 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book getBook(String isbn) throws SQLException {
-        String query = "SELECT * FROM library.book WHERE isbn = '"+isbn+"'";
+        String query = "SELECT * FROM library.book WHERE isbn = '" + isbn + "'";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        Book book = new Book(0,null,null,null,null,null);
+        Book book = new Book(0, null, null, null, null, null);
         while (rs.next()) {
             book.setIdbook(rs.getInt("idbook"));
             book.setTitle(rs.getString("title"));
@@ -46,9 +46,22 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void updateBook(Book book) {
-
+        String query = "UPDATE library.book SET title=?, author=?, description=?, isbn=?, genre=? WHERE idbook=?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setString(3, book.getDescription());
+            pstmt.setString(4, book.getIsbn());
+            pstmt.setString(5, book.getGenre());
+            pstmt.setInt(6, book.getIdbook());
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("No se encontró el libro con ID: " + book.getIdbook());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el libro: " + e.getMessage());
+        }
     }
-
     @Override
     public void createBook(Book book) {
 
