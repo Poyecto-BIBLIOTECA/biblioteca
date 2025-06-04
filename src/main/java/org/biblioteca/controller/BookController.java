@@ -18,6 +18,14 @@ public class BookController {
         Book book = bookRepository.getBook(isbn);
         return book;
     }
+    public String deleteBook(int id) throws SQLException {
+        int deleted = bookRepository.deleteBook(id);
+            if (deleted > 0) {
+            return "✅ Libro excluido exitosamente! :)";
+        } else {
+            return "❌❌️ El libro no existe. :(";
+        }
+    }
 }
 
 

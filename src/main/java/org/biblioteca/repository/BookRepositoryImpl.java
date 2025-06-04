@@ -20,8 +20,8 @@ public class BookRepositoryImpl implements BookRepository {
         ResultSet rs = stmt.executeQuery(query);
         List<Book> books = new ArrayList<>();
         while (rs.next()) {
-            Book book = new Book(rs.getInt("idbook"), rs.getString("title"),rs.getString("author"),
-                    rs.getString("description"),rs.getString("isbn"), rs.getString("genre"));
+            Book book = new Book(rs.getInt("idbook"), rs.getString("title"), rs.getString("author"),
+                    rs.getString("description"), rs.getString("isbn"), rs.getString("genre"));
             books.add(book);
         }
         return books;
@@ -29,10 +29,10 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book getBook(String isbn) throws SQLException {
-        String query = "SELECT * FROM library.book WHERE isbn = '"+isbn+"'";
+        String query = "SELECT * FROM library.book WHERE isbn = '" + isbn + "'";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        Book book = new Book(0,null,null,null,null,null);
+        Book book = new Book(0, null, null, null, null, null);
         while (rs.next()) {
             book.setIdbook(rs.getInt("idbook"));
             book.setTitle(rs.getString("title"));
@@ -55,7 +55,18 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void deleteBook(int idbook) {
+    public int deleteBook(int id) throws SQLException {
+        String sql = "DELETE FROM book WHERE idbook = " + id;
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            int affectedRows = stmt.executeUpdate(sql);
+            return affectedRows;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
 
+        }
     }
 }
