@@ -14,20 +14,23 @@ public class BookController {
         List<Book> books = bookRepository.getLibrary();
         return books;
     }
+
     public Book showBook(String isbn) throws SQLException {
         Book book = bookRepository.getBook(isbn);
         return book;
     }
+
     public String deleteBook(int id) throws SQLException {
         int deleted = bookRepository.deleteBook(id);
-            if (deleted > 0) {
+        if (deleted > 0) {
             return "✅ Libro excluido exitosamente! :)";
         } else {
             return "❌❌️ El libro no existe. :(";
         }
-    public void updateBook(Book book) {
-        bookRepository.updateBook(book);
     }
+        public void updateBook (Book book){
+            bookRepository.updateBook(book);
+        }
 }
 
 
