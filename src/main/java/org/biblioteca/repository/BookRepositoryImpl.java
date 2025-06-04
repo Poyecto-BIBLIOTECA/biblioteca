@@ -80,8 +80,8 @@ public class BookRepositoryImpl implements BookRepository {
 
 
     @Override
-    public int deleteBook(int id) throws SQLException {
-        String sql = "DELETE FROM book WHERE idbook = " + id;
+    public int deleteBook(String isbn) throws SQLException {
+        String sql = "DELETE FROM book WHERE isbn = '" + isbn + "'";
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -91,7 +91,6 @@ public class BookRepositoryImpl implements BookRepository {
             if (stmt != null) {
                 stmt.close();
             }
-
         }
     }
 }

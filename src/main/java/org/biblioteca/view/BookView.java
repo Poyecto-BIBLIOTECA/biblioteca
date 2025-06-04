@@ -53,8 +53,10 @@ public class BookView {
             System.out.println("GÉNERO: " + book.getGenre());
             System.out.println("---------------------------");
         }
+        viewMenu();
     }
-    public void addBook() {
+
+    public void addBook() throws SQLException {
         System.out.println("➡ Añadiendo nuevo libro");
 
         System.out.print("Título: ");
@@ -73,13 +75,14 @@ public class BookView {
         String genre = scanner.nextLine();
 
         if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
-            System.out.println("❌ Error: Título, autor e ISBN son obligatorios");
+            System.out.println("Error: Título, autor e ISBN son obligatorios");
             return;
         }
 
         Book newBook = new Book(0, title, author, description, isbn, genre);
         bookController.createBook(newBook);
-        System.out.println("✅ Libro añadido correctamente!");
+        System.out.println("¡Libro añadido correctamente!");
+        viewMenu();
     }
 
     public void editBook() throws SQLException {
@@ -98,10 +101,10 @@ public class BookView {
         System.out.println("ISBN: " + book.getIsbn());
         System.out.println("Género: " + book.getGenre());
 
-        System.out.println("¿Es este el libro que deseas editar? (s/n): ");
-        String confirmacion = scanner.nextLine().trim().toLowerCase();
+        System.out.println("¿Es este el libro que deseas editar? (sí o no): ");
+        String confirm = scanner.nextLine().trim().toLowerCase();
 
-        if (!(confirmacion.equals("s") || confirmacion.equals("si") || confirmacion.equals("sí"))) {
+        if (!(confirm.equals("s") || confirm.equals("si") || confirm.equals("sí"))) {
             System.out.println("Edición cancelada.");
             return;
         }
@@ -130,28 +133,32 @@ public class BookView {
 
         bookController.updateBook(book);
         System.out.println("Libro actualizado exitosamente!");
+        viewMenu();
     }
     public void deleteBook() throws SQLException {
         while (true) {
-            System.out.println("Introduce el ID del libro que quieres eliminar: ");
-            int id = Integer.parseInt(scanner.nextLine());
-
-            System.out.println("¿Está seguro que desea borrar este libro? (s/n): ");
+            System.out.println("Introduce el ISBN del libro que quieres eliminar: ");
+            String isbn = scanner.nextLine();
+            Book book = bookController.showBook(isbn);
+            System.out.println("¿Es este el libro que quieres eliminar? (sí o no)");
+            System.out.println("Título: " + book.getTitle());
+            System.out.println("Autor: " + book.getAuthor());
             String confirm = scanner.nextLine().trim().toLowerCase();
 
-            if (confirm.equals("s")) {
-                String result = bookController.deleteBook(id);
+            if (confirm.equals("s") || confirm.equals("si") || confirm.equals("sí")) {
+                String result = bookController.deleteBook(isbn);
                 System.out.println(result);
                 break;
-            } else if (confirm.equals("n")) {
-                System.out.println("⚠ Operación cancelada. Por favor, introduce otro ID.");
+            } else if (confirm.equals("n") || confirm.equals("no")) {
+                System.out.println("Operación cancelada. Por favor, introduce otro ISBN.");
             } else {
-                System.out.println("⚠ Respuesta inválida. Por favor, responde con s o n.");
+                System.out.println("Respuesta inválida. Por favor, responde con sí o no.");
             }
         }
+        viewMenu();
     }
     public void exitApp() {
-        System.out.println("¡Gracias por utilizar nuestra aplicacion! ¡Hasta pronto!");
+        System.out.println("¡Gracias por utilizar nuestra aplicación! ¡Hasta pronto!");
 
         scanner.close();
     }

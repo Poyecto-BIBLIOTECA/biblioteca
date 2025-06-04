@@ -23,12 +23,12 @@ public class BookController {
         bookRepository.createBook(book);
     }
 
-    public String deleteBook(int id) throws SQLException {
-        int deleted = bookRepository.deleteBook(id);
+    public String deleteBook(String isbn) throws SQLException {
+        int deleted = bookRepository.deleteBook(isbn);
         if (deleted > 0) {
-            return "✅ Libro excluido exitosamente! :)";
+            return "Libro excluido exitosamente! ";
         } else {
-            return "❌❌️ El libro no existe. :(";
+            return "El libro no existe.";
         }
     }
         public void updateBook (Book book){
