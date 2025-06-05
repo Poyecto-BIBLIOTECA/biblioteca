@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBManager {
-
     private static final String URL = "jdbc:mysql://localhost:3306/library";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
@@ -19,6 +18,14 @@ public class DBManager {
             System.out.println(exception.getMessage());
         }
         return connection;
+    }
+    public static void closeConnection() {
+        try {
+            connection.close();
+            System.out.println("Conexion cerrada correctamente");
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
 }
