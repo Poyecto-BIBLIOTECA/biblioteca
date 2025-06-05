@@ -1,7 +1,6 @@
 package org.biblioteca.view;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 import org.biblioteca.controller.BookController;

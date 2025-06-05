@@ -1,7 +1,6 @@
 package org.biblioteca.controller;
 
 import org.biblioteca.model.Book;
-import org.biblioteca.repository.BookRepository;
 import org.biblioteca.repository.BookRepositoryImpl;
 
 import java.sql.SQLException;
