@@ -39,7 +39,8 @@ src/
 │   │   └── Main.java        # Punto de entrada
 │   └── resources/
 └── test/                    # Pruebas unitarias (JUnit 5)
-🛠 Requisitos Técnicos
+```
+## 🛠 Requisitos Técnicos
 Java JDK 21+
 
 MySQL Server 8.0+
@@ -48,7 +49,7 @@ Intellij IDEA (recomendado)
 
 Driver MySQL Connector/J 8.0+
 
-🚀 Instalación
+## 🚀 Instalación
 Clonar repositorio:
 
 bash
@@ -77,7 +78,7 @@ private static final String USER = "tu_usuario";
 private static final String PASSWORD = "tu_contraseña";
 Ejecutar aplicación desde Main.java
 
-🖥️ Uso
+## 🖥️ Uso
 bash
 Menú principal:
 1. Ver listado de libros
@@ -88,8 +89,8 @@ Menú principal:
 
 Ingrese opción: 1
 
-🧪 Testing
-Ejecutar pruebas unitarias con JUnit 5:
+## 🧪 Testing
+### Ejecutar pruebas unitarias con JUnit 5:
 
 bash
 mvn test
